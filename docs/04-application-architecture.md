@@ -2,159 +2,67 @@
 
 ## 4.1 Purpose
 
-This document defines the architectural standards that every application deployed on the Ne2 Platform is expected to follow.
+This document defines the architectural standards every application deployed on the Ne2 Platform is expected to follow.
 
-The goal is not to enforce identical implementations across all projects, but rather to establish a consistent operational model that simplifies development, deployment and maintenance.
-
-Applications are free to choose different implementation technologies when justified. However, they should conform to the platform standards described in this document.
+The goal is not identical implementations across projects, but a consistent operational model that simplifies development, deployment and maintenance. Applications are free to choose different implementation technologies when justified, but must conform to the standards described here.
 
 ---
 
 ## 4.2 Supported Application Types
 
-The platform currently supports three primary application categories.
+The platform currently supports three application categories.
 
 ### Static Websites
 
-Static websites are used for:
-
-* Marketing websites.
-* Landing pages.
-* Documentation portals.
-* Personal websites.
-* Product websites.
-
-The default technology stack is:
-
-* Hugo
-* Nginx
-* Docker
-
-Static websites should not require a database or server-side application logic.
-
-Whenever a website can be implemented as static content, it should be.
-
----
+Used for marketing sites, landing pages, documentation portals and product websites. Default stack: **Hugo, Nginx, Docker**. Static websites should not require a database or server-side logic — whenever a website can be static, it should be.
 
 ### Single Page Applications (SPA)
 
-Single Page Applications are used for:
-
-* Product frontends.
-* Internal tools.
-* Dashboards.
-* Administrative interfaces.
-
-The default technology stack is:
-
-* React
-* Vite
-* TypeScript
-
-Alternative frontend technologies may be used when justified.
-
-All SPA applications are expected to be built as static assets and served through a lightweight web server.
-
----
+Used for product frontends, internal tools, dashboards and administrative interfaces. Default stack: **React, Vite, TypeScript**. Alternative frontend technologies may be used when justified. SPAs are built as static assets and served through a lightweight web server.
 
 ### Backend APIs
 
-Backend APIs contain application business logic.
-
-The default technology stack is:
-
-* ASP.NET
-* PostgreSQL
-* Docker
-
-Alternative backend technologies are permitted.
-
-The platform standardizes deployment and operations, not programming languages.
-
-Backend applications should expose HTTP APIs and follow standard web application practices.
+Contain application business logic. Default stack: **ASP.NET, PostgreSQL, Docker**. Alternative backend technologies are permitted — see [Technology Freedom](01-goals.md#technology-freedom). Backend applications should expose HTTP APIs and follow standard web application practices.
 
 ---
 
 ## 4.3 Docker-First Architecture
 
-Every deployable component must be packaged as a Docker image.
-
-Docker images are the only deployment artifact supported by the platform.
-
-Applications must be runnable locally through Docker before being deployed to production.
-
-Benefits:
-
-* Consistent environments.
-* Predictable deployments.
-* Technology independence.
-* Simplified operations.
-
-If an application cannot be containerized, it is not compatible with the platform.
+Every deployable component must be packaged as a Docker image and be runnable locally through Docker before being deployed to production (see [Docker is the Universal Deployment Unit](02-principles.md#24-docker-is-the-universal-deployment-unit)). This guarantees consistent environments, predictable deployments and technology independence.
 
 ---
 
 ## 4.4 Twelve-Factor Applications
 
-Applications should follow the principles described in the Twelve-Factor App methodology whenever practical.
-
-The following principles are considered mandatory.
+Applications should follow the [Twelve-Factor App](https://12factor.net/) methodology whenever practical. The following principles are mandatory.
 
 ### Codebase
 
 Each application must have a single authoritative source repository.
 
----
-
 ### Dependencies
 
-Dependencies must be declared explicitly.
-
-Applications should not depend on software manually installed on servers.
-
----
+Dependencies must be declared explicitly; applications should not depend on software manually installed on servers.
 
 ### Configuration
 
-Configuration must live outside the codebase.
-
-Environment-specific settings must be injected through environment variables.
-
-Configuration should never be hardcoded.
-
----
+Configuration must live outside the codebase and never be hardcoded — see [Configuration Standards](#45-configuration-standards).
 
 ### Backing Services
 
-Applications should treat databases, queues, storage providers and external services as attached resources.
-
-Applications should be able to switch providers through configuration.
-
----
+Databases, queues, storage providers and external services are treated as attached resources; applications should be able to switch providers through configuration.
 
 ### Build, Release and Run
 
-Build, release and execution should be clearly separated stages.
-
-Applications should be deployable from immutable Docker images.
-
----
+Build, release and execution are clearly separated stages. Applications are deployable from immutable Docker images.
 
 ### Processes
 
-Applications should be stateless whenever possible.
-
-Persistent state belongs in backing services.
-
----
+Applications should be stateless whenever possible; persistent state belongs in backing services.
 
 ### Logs
 
-Applications should write logs to standard output.
-
-Applications should not manage log files directly.
-
-The observability layer is responsible for log collection and retention.
+Applications write logs to standard output and do not manage log files directly; the observability layer is responsible for collection and retention (see [Logging Standards](#48-logging-standards)).
 
 ---
 
@@ -162,46 +70,23 @@ The observability layer is responsible for log collection and retention.
 
 ### Environment Variables
 
-Application configuration must be provided through environment variables.
-
-Examples:
+Application configuration must be provided through environment variables, never stored in source code. Examples:
 
 ```text
 DATABASE_CONNECTION_STRING
+ASPNETCORE_ENVIRONMENT
 ZITADEL_AUTHORITY
 ZITADEL_CLIENT_ID
 PUBLIC_API_URL
 ```
 
-Configuration should never be stored inside source code.
-
----
-
 ### Secrets
 
-Secrets must not be committed to Git repositories.
-
-Examples:
-
-* API keys.
-* Database passwords.
-* Access tokens.
-* Signing certificates.
-
-Secrets should be managed through Coolify environment variables.
-
----
+Secrets (API keys, database passwords, access tokens, signing certificates) must never be committed to Git repositories. They are managed through Coolify environment variables — see [Secrets Management](05-deployment.md#secrets-management) for how they're injected at deploy time.
 
 ### Environment Separation
 
-Applications should support different environments through configuration rather than code changes.
-
-Typical environments include:
-
-* Local
-* Production
-
-Additional environments may be introduced when required.
+Applications should support different environments (typically local and production) through configuration rather than code changes. Additional environments may be introduced when required.
 
 ---
 
@@ -209,29 +94,15 @@ Additional environments may be introduced when required.
 
 ### PostgreSQL
 
-PostgreSQL is the default persistence technology.
-
-Applications should use PostgreSQL unless a strong justification exists for an alternative datastore.
-
----
+PostgreSQL is the default persistence technology; applications should use it unless there is a strong justification for an alternative datastore.
 
 ### Schema Ownership
 
-Each application owns its own schema.
-
-Applications must never directly manipulate data owned by another application.
-
-Cross-application integrations should occur through APIs or events.
-
----
+Each application owns its own schema and must never directly manipulate data owned by another application. Cross-application integrations occur through APIs or events.
 
 ### Migrations
 
-Database schema changes must be versioned.
-
-Schema modifications should be performed through migrations rather than manual database changes.
-
-For ASP.NET applications, Entity Framework migrations are the default mechanism.
+Schema changes must be versioned through migrations rather than manual database changes. For ASP.NET applications, Entity Framework migrations are the default mechanism — see [Database Deployment](05-deployment.md#59-database-deployment) for how migrations run during deployment.
 
 ---
 
@@ -239,114 +110,41 @@ For ASP.NET applications, Entity Framework migrations are the default mechanism.
 
 ### Authentication
 
-Authentication is delegated to Zitadel.
-
-Applications should trust identity claims provided by the platform.
-
-Applications must not implement custom username/password systems.
-
----
+Authentication is delegated to Zitadel (see [Identity Layer](03-platform.md#37-identity-layer)). Applications trust identity claims provided by the platform and must not implement custom username/password systems.
 
 ### Authorization
 
-Authorization remains an application concern.
-
-Each application is responsible for:
-
-* Roles.
-* Permissions.
-* Ownership rules.
-* Business-specific access policies.
+Authorization remains an application concern: roles, permissions, ownership rules and business-specific access policies.
 
 ---
 
 ## 4.8 Logging Standards
 
-Applications must emit structured logs.
-
-Minimum requirements:
-
-* Timestamp.
-* Log level.
-* Message.
-* Context information.
-
-Structured logging enables effective querying and diagnostics through Seq.
-
----
+Applications must emit structured logs with, at minimum, a timestamp, log level, message and context information — this enables effective querying and diagnostics through [Seq](03-platform.md#38-observability-layer).
 
 ### Log Levels
 
-Applications should use log levels consistently.
-
-#### Debug
-
-Diagnostic information useful during development.
-
-#### Information
-
-Normal business and operational events.
-
-#### Warning
-
-Unexpected situations that do not prevent execution.
-
-#### Error
-
-Failures affecting application behaviour.
-
-#### Critical
-
-Failures requiring immediate attention.
-
----
+* **Debug** — diagnostic information useful during development.
+* **Information** — normal business and operational events.
+* **Warning** — unexpected situations that do not prevent execution.
+* **Error** — failures affecting application behaviour.
+* **Critical** — failures requiring immediate attention.
 
 ### Sensitive Data
 
-Applications must not log:
-
-* Passwords.
-* Access tokens.
-* Secrets.
-* Personal information unless strictly necessary.
+Applications must not log passwords, access tokens, secrets, or personal information unless strictly necessary.
 
 ---
 
 ## 4.9 Health Checks
 
-Applications should expose health endpoints.
-
-Example:
-
-```text
-/health
-```
-
-Health checks should verify:
-
-* Application startup status.
-* Database connectivity.
-* Critical dependencies.
-
-Health checks should remain lightweight and fast.
+Applications should expose a lightweight, fast health endpoint (e.g. `/health`) that verifies application startup status, database connectivity and critical dependencies.
 
 ---
 
 ## 4.10 Testing Standards
 
-Automated testing is required.
-
-The exact testing strategy may vary by application.
-
-Recommended layers include:
-
-* Unit tests.
-* Integration tests.
-* End-to-end tests.
-
-All automated tests must execute as part of the CI pipeline.
-
-Applications should not be deployable when tests fail.
+Automated testing is required; the exact strategy may vary by application but typically includes unit, integration and end-to-end tests. All tests must execute as part of the CI pipeline, and applications should not be deployable when tests fail.
 
 ---
 
@@ -368,17 +166,14 @@ Repositories should be self-contained and executable by a new developer with min
 
 ## 4.12 Definition of Done
 
-An application is considered production-ready when:
+An application is production-ready when:
 
 * Source code is versioned in Git.
-* Automated tests exist.
-* CI pipeline passes.
-* Application is containerized.
-* Configuration is externalized.
+* Automated tests exist and the CI pipeline passes.
+* The application is containerized and configuration is externalized.
 * Authentication is delegated to Zitadel.
-* Structured logging is implemented.
-* Health checks are available.
+* Structured logging and health checks are implemented.
 * Database migrations are versioned.
 * Deployment can be performed automatically through the platform.
 
-Applications that do not satisfy these requirements are considered incomplete regardless of their functional status.
+Applications that do not satisfy these requirements are considered incomplete regardless of functional status.

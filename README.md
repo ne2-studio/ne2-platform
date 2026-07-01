@@ -24,6 +24,7 @@ This repository documents the platform architecture, operational standards, depl
 * [ADR-0008: ASP.NET as Default Backend Stack](adrs/0008-aspnet-as-default-backend.md)
 * [ADR-0009: Cloudflare as Edge Layer](adrs/0009-cloudflare-as-edge-layer.md)
 * [ADR-0010: Single VPS Architecture](adrs/0010-single-vps-architecture.md)
+* [ADR-0011: Hexagonal Architecture for Backend Applications](adrs/0011-hexagonal-architecture-for-backends.md)
 
 ## Infrastructure
 

@@ -33,7 +33,7 @@ def collect_markdown_files() -> list[Path]:
     for d in MD_DIRS:
         if not d.exists():
             continue
-        files.extend(sorted(p for p in d.glob("*.md") if p.is_file()))
+        files.extend(sorted(p for p in d.glob("**/*.md") if p.is_file()))
     # de-duplicate while preserving order (ROOT glob won't recurse into subdirs)
     seen = set()
     unique_files = []

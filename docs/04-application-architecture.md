@@ -10,21 +10,11 @@ The goal is not identical implementations across projects, but a consistent oper
 
 ## 4.2 Supported Application Types
 
-The platform currently supports three application categories.
+The platform currently supports three application categories:
 
-### Static Websites
-
-Used for marketing sites, landing pages, documentation portals and product websites. Default stack: **Hugo, Nginx, Docker**. Static websites should not require a database or server-side logic — whenever a website can be static, it should be.
-
-### Single Page Applications (SPA)
-
-Used for product frontends, internal tools, dashboards and administrative interfaces. Default stack: **React, Vite, TypeScript** ([ADR-0007](../adrs/0007-react-as-default-frontend.md)). Alternative frontend technologies may be used when justified. SPAs are built as static assets and served through a lightweight web server.
-
-### Backend APIs
-
-Contain application business logic. Default stack: **ASP.NET, PostgreSQL, Docker** ([ADR-0008](../adrs/0008-aspnet-as-default-backend.md)). Alternative backend technologies are permitted — see [Technology Freedom](01-goals.md#technology-freedom). Backend applications should expose HTTP APIs and follow standard web application practices.
-
-Regardless of technology stack, backend applications must be structured using hexagonal architecture (ports and adapters), with business logic isolated behind explicitly declared ports and infrastructure concerns implemented as adapters ([ADR-0011](../adrs/0011-hexagonal-architecture-for-backends.md)). This semantically declares each application's ports and capabilities, eases AI-assisted development workflows, and enables testing business logic without infrastructure dependencies.
+* [Static Websites](application-types/static-websites.md)
+* [Single Page Applications (SPA)](application-types/spa.md)
+* [Backend APIs](application-types/backend-apis.md)
 
 ---
 

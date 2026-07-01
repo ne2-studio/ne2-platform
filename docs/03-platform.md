@@ -9,12 +9,12 @@ Applications are developed locally, versioned in GitHub, built and tested throug
 At a high level, the platform consists of:
 
 * A VPS that hosts all workloads.
-* Coolify as the deployment platform.
+* [Coolify](https://coolify.ne2.studio/) as the deployment platform.
 * GitHub as source control and GitHub Actions as the CI/CD system.
 * GitHub Container Registry (GHCR) as the image registry.
 * Cloudflare as CDN and DNS provider.
 * PostgreSQL as the primary database platform.
-* Supporting services for identity, observability and automation.
+* Supporting services for identity ([Zitadel](https://auth.ne2.studio)), observability ([Beszel](https://beszel.ne2.studio/), [Seq](https://logs.ne2.studio)) and automation ([n8n](https://automate.exeal.com/)).
 
 ---
 
@@ -57,7 +57,7 @@ The VPS is the physical foundation of the platform: a single Linux host that run
 
 ### Coolify
 
-Coolify is the platform-as-a-service layer: a simplified operational model on top of Docker responsible for deployments, reverse proxy configuration, SSL certificate provisioning, environment variable management and application lifecycle management. It is the central operational component of the platform ([ADR-0002](../adrs/0002-coolify-as-paas.md)) — see [Deployment Execution](05-deployment.md#deployment-execution) for how it performs a deployment.
+[Coolify](https://coolify.ne2.studio/) is the platform-as-a-service layer: a simplified operational model on top of Docker responsible for deployments, reverse proxy configuration, SSL certificate provisioning, environment variable management and application lifecycle management. It is the central operational component of the platform ([ADR-0002](../adrs/0002-coolify-as-paas.md)) — see [Deployment Execution](05-deployment.md#deployment-execution) for how it performs a deployment.
 
 ### Docker
 
@@ -105,7 +105,7 @@ PostgreSQL is the primary persistence technology, currently run as a shared inst
 
 ### Zitadel
 
-The platform uses Zitadel as its centralized Identity Provider (IdP), handling authentication, SSO, OAuth 2.0 / OpenID Connect flows and user and organization management ([ADR-0006](../adrs/0006-zitadel-as-identity-provider.md)).
+The platform uses [Zitadel](https://auth.ne2.studio) as its centralized Identity Provider (IdP), handling authentication, SSO, OAuth 2.0 / OpenID Connect flows and user and organization management ([ADR-0006](../adrs/0006-zitadel-as-identity-provider.md)).
 
 Authentication is a platform capability, not an application concern: applications trust the identity claims Zitadel provides and focus exclusively on application-level authorization — see [Authentication and Authorization](04-application-architecture.md#47-authentication-and-authorization).
 
@@ -117,7 +117,7 @@ The platform distinguishes between infrastructure observability and application 
 
 ### Infrastructure Observability
 
-Beszel monitors the health and resource consumption of the underlying platform — CPU, memory, disk, network and container resource usage — to answer operational questions such as:
+[Beszel](https://beszel.ne2.studio/) monitors the health and resource consumption of the underlying platform — CPU, memory, disk, network and container resource usage — to answer operational questions such as:
 
 * Is the server healthy?
 * Is a container consuming abnormal resources?
@@ -128,7 +128,7 @@ Beszel provides visibility into the platform itself, not into individual applica
 
 ### Application Observability
 
-Seq is the centralized log management and diagnostics platform for all applications, and the primary source of truth when diagnosing application-level problems: investigating errors, understanding behaviour and following business workflows. See [Logging Standards](04-application-architecture.md#48-logging-standards) for what applications must log and how.
+[Seq](https://logs.ne2.studio) is the centralized log management and diagnostics platform for all applications, and the primary source of truth when diagnosing application-level problems: investigating errors, understanding behaviour and following business workflows. See [Logging Standards](04-application-architecture.md#48-logging-standards) for what applications must log and how.
 
 ---
 
@@ -136,7 +136,7 @@ Seq is the centralized log management and diagnostics platform for all applicati
 
 ### n8n
 
-n8n provides workflow automation: process automation, third-party integrations, scheduled jobs, AI agents and event-driven workflows. Not every business problem requires a custom application; when automation alone is sufficient, workflows are preferred over building new software.
+[n8n](https://automate.exeal.com/) provides workflow automation: process automation, third-party integrations, scheduled jobs, AI agents and event-driven workflows. Not every business problem requires a custom application; when automation alone is sufficient, workflows are preferred over building new software.
 
 ---
 

@@ -82,7 +82,7 @@ PUBLIC_API_URL
 
 ### Secrets
 
-Secrets (API keys, database passwords, access tokens, signing certificates) must never be committed to Git repositories. They are managed through Coolify environment variables — see [Secrets Management](05-deployment.md#secrets-management) for how they're injected at deploy time.
+Secrets (API keys, database passwords, access tokens, signing certificates) must never be committed to Git repositories. They are managed through [Coolify](https://coolify.ne2.studio/) environment variables — see [Secrets Management](05-deployment.md#secrets-management) for how they're injected at deploy time.
 
 ### Environment Separation
 
@@ -110,7 +110,7 @@ Schema changes must be versioned through migrations rather than manual database 
 
 ### Authentication
 
-Authentication is delegated to Zitadel (see [Identity Layer](03-platform.md#37-identity-layer)). Applications trust identity claims provided by the platform and must not implement custom username/password systems.
+Authentication is delegated to [Zitadel](https://auth.ne2.studio) (see [Identity Layer](03-platform.md#37-identity-layer)). Applications trust identity claims provided by the platform and must not implement custom username/password systems.
 
 ### Authorization
 
@@ -120,7 +120,7 @@ Authorization remains an application concern: roles, permissions, ownership rule
 
 ## 4.8 Logging Standards
 
-Applications must emit structured logs with, at minimum, a timestamp, log level, message and context information — this enables effective querying and diagnostics through [Seq](03-platform.md#38-observability-layer).
+Applications must emit structured logs with, at minimum, a timestamp, log level, message and context information — this enables effective querying and diagnostics through [Seq](https://logs.ne2.studio).
 
 ### Log Levels
 

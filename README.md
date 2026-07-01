@@ -24,3 +24,11 @@ This repository documents the platform architecture, operational standards, depl
 * [ADR-0008: ASP.NET as Default Backend Stack](adrs/0008-aspnet-as-default-backend.md)
 * [ADR-0009: Cloudflare as Edge Layer](adrs/0009-cloudflare-as-edge-layer.md)
 * [ADR-0010: Single VPS Architecture](adrs/0010-single-vps-architecture.md)
+
+## Infrastructure
+
+* [Coolify](https://coolify.ne2.studio/) — deployment platform
+* [Zitadel](https://auth.ne2.studio) — identity provider
+* [Seq](https://logs.ne2.studio) — application logs
+* [Beszel](https://beszel.ne2.studio/) — infrastructure monitoring
+* [n8n](https://automate.exeal.com/) — workflow automation

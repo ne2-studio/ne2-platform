@@ -56,7 +56,7 @@ Once validation succeeds, the application is packaged as a Docker image — the 
 
 ## 5.4 Container Registry
 
-All deployable artifacts are published to GitHub Container Registry (GHCR), the central, immutable source of deployment artifacts for the platform and the deployment source for Coolify. Applications are never deployed from local developer machines.
+All deployable artifacts are published to GitHub Container Registry (GHCR), the central, immutable source of deployment artifacts for the platform and the deployment source for [Coolify](https://coolify.ne2.studio/). Applications are never deployed from local developer machines.
 
 ---
 
@@ -140,7 +140,7 @@ If a deployment fails, the failure should be visible in CI logs, diagnosed, and 
 
 ### Runtime Failures
 
-Runtime issues are diagnosed through Seq logs, application health endpoints and Beszel infrastructure metrics (see [Observability Layer](03-platform.md#38-observability-layer)). Observability is the primary troubleshooting mechanism.
+Runtime issues are diagnosed through [Seq](https://logs.ne2.studio) logs, application health endpoints and [Beszel](https://beszel.ne2.studio/) infrastructure metrics (see [Observability Layer](03-platform.md#38-observability-layer)). Observability is the primary troubleshooting mechanism.
 
 ---
 

@@ -25,6 +25,7 @@ This repository documents the platform architecture, operational standards, depl
 * [ADR-0009: Cloudflare as Edge Layer](adrs/0009-cloudflare-as-edge-layer.md)
 * [ADR-0010: Single VPS Architecture](adrs/0010-single-vps-architecture.md)
 * [ADR-0011: Hexagonal Architecture for Backend Applications](adrs/0011-hexagonal-architecture-for-backends.md)
+* [ADR-0012: Monorepo per Product](adrs/0012-monorepo-per-product.md)
 
 ## Infrastructure
 

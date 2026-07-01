@@ -30,7 +30,7 @@ Applications should follow the [Twelve-Factor App](https://12factor.net/) method
 
 ### Codebase
 
-Each application must have a single authoritative source repository.
+Each application's code lives in a single authoritative source repository. Products made of multiple related services (e.g. a backend and a frontend) share a single monorepo, with each service isolated in its own subfolder ([ADR-0012](../adrs/0012-monorepo-per-product.md)).
 
 ### Dependencies
 
@@ -142,17 +142,24 @@ Automated testing is required; the exact strategy may vary by application but ty
 
 ## 4.11 Repository Standards
 
-Every application repository should contain:
+Each product is organized as a monorepo containing all of its related applications, each in its own subfolder ([ADR-0012](../adrs/0012-monorepo-per-product.md)). A typical product repository looks like:
 
 ```text
-README.md
-Dockerfile
+backend/
+  Dockerfile
+  src/
+  tests/
+frontend/
+  Dockerfile
+  src/
+  tests/
 .github/workflows/
-src/
-tests/
+  deploy-backend.yml
+  deploy-frontend.yml
+README.md
 ```
 
-Repositories should be self-contained and executable by a new developer with minimal setup effort.
+Every application subfolder should be self-contained — source, tests and Dockerfile live inside it — and executable by a new developer with minimal setup effort. Each application is built, tested and deployed by its own workflow, scoped to its subfolder (see [Continuous Integration](05-deployment.md#53-continuous-integration)).
 
 ---
 

@@ -40,6 +40,8 @@ Applications are never deployed directly from source code — production deploym
 
 Every repository defines an automated CI pipeline that validates the application remains deployable after every change: dependency restoration, compilation, automated testing and Docker image creation. Any failed step fails the pipeline.
 
+Product monorepos ([ADR-0012](../adrs/0012-monorepo-per-product.md)) define one CI/CD workflow per application, scoped to its subfolder (e.g. `deploy-backend.yml`, `deploy-frontend.yml`). These workflows run independently and in parallel, so a change to one application builds, tests and deploys without waiting on or being blocked by unrelated services in the same repository.
+
 ### Build
 
 The build stage compiles the application and produces deployable artifacts (e.g. Hugo static assets, React bundles, ASP.NET binaries). A successful build must be reproducible from source code alone.
@@ -146,4 +148,4 @@ Runtime issues are diagnosed through [Seq](https://logs.ne2.studio) logs, applic
 
 ## 5.11 Operational Ownership
 
-Applications are expected to be self-contained: source code, tests, Docker image definition, database migrations, CI pipeline and deployment configuration all live in the application repository. Any application should be able to move from repository creation to production deployment with minimal platform-specific work — deployability is a first-class feature of every application.
+Applications are expected to be self-contained: source code, tests, Docker image definition, database migrations and deployment configuration all live in the application's subfolder within its product repository, with an independent CI/CD workflow deploying it ([ADR-0012](../adrs/0012-monorepo-per-product.md)). Any application should be able to move from repository creation to production deployment with minimal platform-specific work — deployability is a first-class feature of every application.

@@ -10,7 +10,7 @@ Rollback strategies increase deployment complexity.
 
 Deployments and database migrations evolve forward only.
 
-Issues are resolved by deploying a fix rather than reverting state.
+See [Forward-Only Evolution](../docs/02-principles.md#27-forward-only-evolution) and [Deployment Strategy](../docs/05-deployment.md#56-deployment-strategy) for how this is applied.
 
 ## Consequences
 

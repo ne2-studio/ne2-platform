@@ -18,11 +18,11 @@ Used for marketing sites, landing pages, documentation portals and product websi
 
 ### Single Page Applications (SPA)
 
-Used for product frontends, internal tools, dashboards and administrative interfaces. Default stack: **React, Vite, TypeScript**. Alternative frontend technologies may be used when justified. SPAs are built as static assets and served through a lightweight web server.
+Used for product frontends, internal tools, dashboards and administrative interfaces. Default stack: **React, Vite, TypeScript** ([ADR-0007](../adrs/0007-react-as-default-frontend.md)). Alternative frontend technologies may be used when justified. SPAs are built as static assets and served through a lightweight web server.
 
 ### Backend APIs
 
-Contain application business logic. Default stack: **ASP.NET, PostgreSQL, Docker**. Alternative backend technologies are permitted — see [Technology Freedom](01-goals.md#technology-freedom). Backend applications should expose HTTP APIs and follow standard web application practices.
+Contain application business logic. Default stack: **ASP.NET, PostgreSQL, Docker** ([ADR-0008](../adrs/0008-aspnet-as-default-backend.md)). Alternative backend technologies are permitted — see [Technology Freedom](01-goals.md#technology-freedom). Backend applications should expose HTTP APIs and follow standard web application practices.
 
 ---
 
@@ -98,7 +98,7 @@ PostgreSQL is the default persistence technology; applications should use it unl
 
 ### Schema Ownership
 
-Each application owns its own schema and must never directly manipulate data owned by another application. Cross-application integrations occur through APIs or events.
+Each application owns its own schema and must never directly manipulate data owned by another application ([ADR-0003](../adrs/0003-shared-postgresql-instance.md)). Cross-application integrations occur through APIs or events.
 
 ### Migrations
 

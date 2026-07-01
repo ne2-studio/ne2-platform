@@ -10,7 +10,7 @@ Authentication should be centralized and reusable across applications.
 
 Use Zitadel as the platform Identity Provider.
 
-Applications delegate authentication to Zitadel and focus on authorization.
+See [Identity Layer](../docs/03-platform.md#37-identity-layer) and [Authentication and Authorization](../docs/04-application-architecture.md#47-authentication-and-authorization) for how applications integrate with it.
 
 ## Consequences
 

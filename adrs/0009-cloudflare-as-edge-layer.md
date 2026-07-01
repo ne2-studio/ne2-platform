@@ -10,6 +10,8 @@ Applications are hosted on a single VPS and require CDN and DNS capabilities.
 
 Cloudflare will act as the platform edge layer.
 
+See [Networking § Cloudflare](../docs/03-platform.md#cloudflare) for its responsibilities.
+
 ## Consequences
 
 * Improved global delivery.

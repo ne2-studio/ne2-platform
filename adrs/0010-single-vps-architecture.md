@@ -10,6 +10,8 @@ The platform prioritizes simplicity, low cost and fast experimentation.
 
 Run the entire platform on a single VPS.
 
+See [Core Infrastructure § VPS](../docs/03-platform.md#vps).
+
 ## Consequences
 
 * Minimal infrastructure cost.

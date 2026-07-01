@@ -8,7 +8,9 @@ Managing Docker workloads directly on a VPS introduces operational overhead.
 
 ## Decision
 
-Coolify will be used as the platform layer responsible for deployments, routing, SSL certificates and application lifecycle management.
+Coolify will be used as the platform layer for deploying and operating application containers.
+
+See [Platform Overview § Coolify](../docs/03-platform.md#coolify) for its full responsibilities.
 
 ## Consequences
 

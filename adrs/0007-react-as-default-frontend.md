@@ -10,7 +10,7 @@ Most AI-assisted development tools generate React applications.
 
 React and Vite are the default frontend stack.
 
-Alternative technologies are allowed when justified.
+See [Supported Application Types](../docs/04-application-architecture.md#42-supported-application-types).
 
 ## Consequences
 

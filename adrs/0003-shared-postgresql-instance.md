@@ -8,9 +8,9 @@ Most applications are prototypes, MVPs or low-traffic products.
 
 ## Decision
 
-Use a single PostgreSQL instance shared by all applications.
+Use a single PostgreSQL instance shared by all applications, isolated at the schema level.
 
-Each application owns its own schema and database user.
+See [Data Access Standards § Schema Ownership](../docs/04-application-architecture.md#46-data-access-standards).
 
 ## Consequences
 

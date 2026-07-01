@@ -53,15 +53,15 @@ Applications are exposed to the internet through Cloudflare and routed internall
 
 ### VPS
 
-The VPS is the physical foundation of the platform: a single Linux host that runs all application and platform containers and provides storage, CPU and memory resources. The platform currently prioritizes simplicity and cost-efficiency over infrastructure redundancy.
+The VPS is the physical foundation of the platform: a single Linux host that runs all application and platform containers and provides storage, CPU and memory resources. The platform currently prioritizes simplicity and cost-efficiency over infrastructure redundancy ([ADR-0010](../adrs/0010-single-vps-architecture.md)).
 
 ### Coolify
 
-Coolify is the platform-as-a-service layer: a simplified operational model on top of Docker responsible for deployments, reverse proxy configuration, SSL certificate provisioning, environment variable management and application lifecycle management. It is the central operational component of the platform — see [Deployment Execution](05-deployment.md#deployment-execution) for how it performs a deployment.
+Coolify is the platform-as-a-service layer: a simplified operational model on top of Docker responsible for deployments, reverse proxy configuration, SSL certificate provisioning, environment variable management and application lifecycle management. It is the central operational component of the platform ([ADR-0002](../adrs/0002-coolify-as-paas.md)) — see [Deployment Execution](05-deployment.md#deployment-execution) for how it performs a deployment.
 
 ### Docker
 
-Docker is the universal deployment standard: every application and service is distributed as a container image, which standardizes runtime environments and isolates workloads. See [Docker is the Universal Deployment Unit](02-principles.md#24-docker-is-the-universal-deployment-unit).
+Docker is the universal deployment standard: every application and service is distributed as a container image, which standardizes runtime environments and isolates workloads ([ADR-0001](../adrs/0001-docker-as-deployment-unit.md)). See [Docker is the Universal Deployment Unit](02-principles.md#24-docker-is-the-universal-deployment-unit).
 
 ---
 
@@ -85,7 +85,7 @@ GHCR stores all deployable artifacts and is the deployment source Coolify pulls 
 
 ### Cloudflare
 
-Cloudflare is the external edge of the platform, providing DNS management, CDN, TLS termination and basic protection against malicious traffic. It reduces load on the origin server while improving global content delivery.
+Cloudflare is the external edge of the platform, providing DNS management, CDN, TLS termination and basic protection against malicious traffic. It reduces load on the origin server while improving global content delivery ([ADR-0009](../adrs/0009-cloudflare-as-edge-layer.md)).
 
 ### Internal Routing
 
@@ -97,7 +97,7 @@ Internal application routing is handled by Coolify through Traefik: host-based r
 
 ### PostgreSQL
 
-PostgreSQL is the primary persistence technology, currently run as a shared instance with applications isolated through dedicated users and schemas. See [Data Access Standards](04-application-architecture.md#46-data-access-standards) for schema ownership and migration rules.
+PostgreSQL is the primary persistence technology, currently run as a shared instance with applications isolated through dedicated users and schemas ([ADR-0003](../adrs/0003-shared-postgresql-instance.md)). See [Data Access Standards](04-application-architecture.md#46-data-access-standards) for schema ownership and migration rules.
 
 ---
 
@@ -105,7 +105,7 @@ PostgreSQL is the primary persistence technology, currently run as a shared inst
 
 ### Zitadel
 
-The platform uses Zitadel as its centralized Identity Provider (IdP), handling authentication, SSO, OAuth 2.0 / OpenID Connect flows and user and organization management.
+The platform uses Zitadel as its centralized Identity Provider (IdP), handling authentication, SSO, OAuth 2.0 / OpenID Connect flows and user and organization management ([ADR-0006](../adrs/0006-zitadel-as-identity-provider.md)).
 
 Authentication is a platform capability, not an application concern: applications trust the identity claims Zitadel provides and focus exclusively on application-level authorization — see [Authentication and Authorization](04-application-architecture.md#47-authentication-and-authorization).
 

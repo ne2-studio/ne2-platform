@@ -10,7 +10,7 @@ The primary maintainer has extensive experience with ASP.NET.
 
 ASP.NET is the default backend technology for new applications.
 
-Alternative technologies are allowed when justified.
+See [Supported Application Types](../docs/04-application-architecture.md#42-supported-application-types).
 
 ## Consequences
 

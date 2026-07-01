@@ -24,7 +24,7 @@ Infrastructure should solve today's problems. Future scalability concerns only i
 
 ### 2.4 Docker is the Universal Deployment Unit
 
-Every deployable component must be packaged as a Docker image. Deployment, operations and infrastructure management are standardized around containers — see [Docker-First Architecture](04-application-architecture.md#43-docker-first-architecture) for the application-level requirements this implies.
+Every deployable component must be packaged as a Docker image ([ADR-0001](../adrs/0001-docker-as-deployment-unit.md)). Deployment, operations and infrastructure management are standardized around containers — see [Docker-First Architecture](04-application-architecture.md#43-docker-first-architecture) for the application-level requirements this implies.
 
 ---
 
@@ -42,7 +42,7 @@ Infrastructure resources are shared by default. Dedicated infrastructure is only
 
 ### 2.7 Forward-Only Evolution
 
-Applications, databases and infrastructure evolve by moving forward, in small incremental changes. Rollbacks are exceptional events rather than a standard operational mechanism — see [Deployment Strategy](05-deployment.md#56-deployment-strategy) for how this applies to releases and migrations.
+Applications, databases and infrastructure evolve by moving forward, in small incremental changes. Rollbacks are exceptional events rather than a standard operational mechanism ([ADR-0004](../adrs/0004-forward-only-deployments.md)) — see [Deployment Strategy](05-deployment.md#56-deployment-strategy) for how this applies to releases and migrations.
 
 ---
 

@@ -12,7 +12,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: ghcr.io/ne2-studio/cashclarity-frontend
+  IMAGE_NAME: ghcr.io/ne2-studio/servicetemplate-frontend
 
 defaults:
   run:
@@ -24,8 +24,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - name: Setup Node
         uses: actions/setup-node@v4
